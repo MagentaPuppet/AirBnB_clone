@@ -7,6 +7,7 @@ import uuid
 
 class BaseModel:
     """class that defines all common attributes/methods for other classes"""
+
     def __init__(self) -> None:
         """init method"""
         self.id = str(uuid.uuid4())
