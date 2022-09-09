@@ -6,6 +6,12 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
+    def test___str__(self):
+        my_model = BaseModel()
+        self.assertIsInstance(my_model.__str__(), str)
+        self.assertEqual(my_model.__str__(), "[{}] ({}) {}".format(
+                         type(my_model).__name__, my_model.id,
+                         my_model.__dict__))
 
     def test_save(self):
         time_1 = datetime.now()
@@ -25,7 +31,6 @@ class TestBaseModel(unittest.TestCase):
         created_at = my_model.created_at
         updated_at = my_model.updated_at
         dict = my_model.to_dict()
-        self.assertEqual(len(dict), len(my_model.__dict__) + 1)
         self.assertEqual(dict['__class__'], str(type(my_model).__name__))
         self.assertEqual(type(dict['__class__']), str)
         self.assertEqual(type(dict['created_at']), str)
