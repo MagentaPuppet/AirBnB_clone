@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""test module for the class BaseModel"""
+
 import unittest
 from datetime import date, datetime
 from xmlrpc.client import _iso8601_format
@@ -6,7 +8,9 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
+    """tests the class BaseModel"""
     def test___str__(self):
+        """checks if __str__() returns a string in the correct format"""
         my_model = BaseModel()
         self.assertIsInstance(my_model.__str__(), str)
         self.assertEqual(my_model.__str__(), "[{}] ({}) {}".format(
@@ -14,6 +18,7 @@ class TestBaseModel(unittest.TestCase):
                          my_model.__dict__))
 
     def test_save(self):
+        """checks if save() updates the attribute created_at"""
         time_1 = datetime.now()
         my_model = BaseModel()
         time_2 = datetime.now()
@@ -27,6 +32,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertLessEqual(my_model.updated_at, time_3)
 
     def test_to_dict(self):
+        """checks if to_dict() updates __dict__ for the instance. checks if:
+        a key __class__ is added which contains a string showing the class name
+        created_at and updated_at are converted to strings in ISO format
+        """
         my_model = BaseModel()
         created_at = my_model.created_at
         updated_at = my_model.updated_at
