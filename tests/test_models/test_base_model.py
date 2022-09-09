@@ -35,12 +35,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(str(datetime.isoformat(updated_at)),
                          dict['created_at'])
 
-    def test_id(self):
-        pass
-
-    def test_created_at(self):
-        pass
-
 
 if __name__ == '__main__':
     unittest.main()
