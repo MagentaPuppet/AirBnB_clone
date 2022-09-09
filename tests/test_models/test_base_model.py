@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""test module for the class BaseModel"""
+"""Test module for the class BaseModel"""
 
 import unittest
 from datetime import date, datetime
@@ -8,9 +8,9 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
-    """tests the class BaseModel"""
+    """Tests the class BaseModel"""
     def test___str__(self):
-        """checks if __str__() returns a string in the correct format"""
+        """Tests if __str__() returns a string in the correct format"""
         my_model = BaseModel()
         self.assertIsInstance(my_model.__str__(), str)
         self.assertEqual(my_model.__str__(), "[{}] ({}) {}".format(
@@ -18,7 +18,7 @@ class TestBaseModel(unittest.TestCase):
                          my_model.__dict__))
 
     def test_save(self):
-        """checks if save() updates the attribute created_at"""
+        """Tests if save() updates the attribute created_at"""
         time_1 = datetime.now()
         my_model = BaseModel()
         time_2 = datetime.now()
@@ -32,9 +32,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertLessEqual(my_model.updated_at, time_3)
 
     def test_to_dict(self):
-        """checks if to_dict() updates __dict__ for the instance. checks if:
-        a key __class__ is added which contains a string showing the class name
-        created_at and updated_at are converted to strings in ISO format
+        """Tests if to_dict() updates __dict__ for the instance -> Tests if:
+         - a key __class__ is added which contains a string showing the class
+           name
+         - the instance attributes created_at and updated_at are converted
+           to string objects in the ISO format
         """
         my_model = BaseModel()
         created_at = my_model.created_at
@@ -48,6 +50,15 @@ class TestBaseModel(unittest.TestCase):
                          dict['created_at'])
         self.assertEqual(str(datetime.isoformat(updated_at)),
                          dict['created_at'])
+
+    def test_kwargs(self):
+        """Tests if the attributes of my_model and my_new_model are the same
+           and that the two instances are not the same object
+        """
+        my_model = BaseModel()
+        my_new_model = BaseModel(**(my_model.to_dict()))
+        self.assertEqual(my_model.__str__(), my_new_model.__str__())
+        self.assertIsNot(my_model, my_new_model)
 
 
 if __name__ == '__main__':
