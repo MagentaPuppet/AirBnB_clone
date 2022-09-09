@@ -28,7 +28,7 @@ class BaseModel:
         """returns a dictionary containing all keys/values
            of __dict__ of the instance
         """
-        dict = self.__dict__
+        dict = self.__dict__.copy()
         dict.update(
             {'created_at': str(datetime.isoformat(dict['created_at'])),
              'updated_at': str(datetime.isoformat(dict['updated_at'])),
