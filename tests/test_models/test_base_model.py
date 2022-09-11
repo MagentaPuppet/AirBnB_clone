@@ -2,8 +2,7 @@
 """Test module for the class BaseModel"""
 
 import unittest
-from datetime import date, datetime
-from xmlrpc.client import _iso8601_format
+from datetime import datetime
 from models.base_model import BaseModel
 
 
