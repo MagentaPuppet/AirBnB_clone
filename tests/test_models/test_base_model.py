@@ -9,8 +9,10 @@ from models.base_model import BaseModel
 
 class TestBaseModel(unittest.TestCase):
     """Tests the class BaseModel"""
+
     def test___str__(self):
         """Tests if __str__() returns a string in the correct format"""
+
         my_model = BaseModel()
         self.assertIsInstance(my_model.__str__(), str)
         self.assertEqual(my_model.__str__(), "[{}] ({}) {}".format(
@@ -19,6 +21,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         """Tests if save() updates the attribute created_at"""
+
         time_1 = datetime.now()
         my_model = BaseModel()
         time_2 = datetime.now()
@@ -38,6 +41,7 @@ class TestBaseModel(unittest.TestCase):
          - the instance attributes created_at and updated_at are converted
            to string objects in the ISO format
         """
+
         my_model = BaseModel()
         created_at = my_model.created_at
         updated_at = my_model.updated_at
@@ -55,6 +59,7 @@ class TestBaseModel(unittest.TestCase):
         """Tests if the attributes of my_model and my_new_model are the same
            and that the two instances are not the same object
         """
+
         my_model = BaseModel()
         my_new_model = BaseModel(**(my_model.to_dict()))
         self.assertEqual(my_model.__str__(), my_new_model.__str__())
