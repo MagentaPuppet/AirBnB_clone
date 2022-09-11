@@ -58,7 +58,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(all_1, all_2)
 
     def test___file_path(self):
-        pass
+        self.assertTrue(exists(TestFileStorage.__file_path))
 
     def test___objects(self):
         pass
