@@ -57,6 +57,10 @@ class TestFileStorage(unittest.TestCase):
         all_2 = storage.all()
         self.assertEqual(all_1, all_2)
 
+    def test___file_path(self):
+        pass
+
+    def test___objects(self):
 
 if __name__ == '__main__':
     unittest.main()
