@@ -61,7 +61,8 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(exists(TestFileStorage.__file_path))
 
     def test___objects(self):
-        pass
+        storage = FileStorage()
+        self.assertTrue(storage.all())
 
 if __name__ == '__main__':
     unittest.main()
