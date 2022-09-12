@@ -7,7 +7,7 @@ import cmd
 class HBNBCommand(cmd.Cmd):
     """Class that defines the console commands for the hbnb console"""
 
-    intro = 'Welcome to the HBNB console. Type help or ? to list commands.\n'
+    #intro = 'Welcome to the HBNB console. Type help or ? to list commands.\n'
     prompt = '(hbnb)'
 
     def do_quit(self, arg):
