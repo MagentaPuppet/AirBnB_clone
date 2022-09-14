@@ -83,12 +83,12 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     del storage.all()[key]
                     storage.save()
-                    storage.reload()
-                    if key in storage.all():
-                        print("** an error occured **")
-                    else:
-                        print("** instance {} destroyed successfully **"
-                              .format(key))
+                    # storage.reload()
+                    # if key in storage.all():
+                    #     print("** an error occured **")
+                    # else:
+                    #     print("** instance {} destroyed successfully **"
+                    #           .format(key))
 
     def do_all(self, arg):
         """Prints all string representations of all instances
@@ -136,12 +136,12 @@ class HBNBCommand(cmd.Cmd):
                         else:
                             setattr(storage.all()[key], args[2], args[3])
                             storage.save()
-                            storage.reload()
-                            if getattr(storage.all()[key], args[2]) != args[3]:
-                                print("** an error occured **")
-                            else:
-                                print("** attribute <{}> updated \
-                                      successfully **".format(args[2]))
+                            # storage.reload()
+                            # if getattr(storage.all()[key], args[2]) != args[3]:
+                            #     print("** an error occured **")
+                            # else:
+                            #     print("** attribute <{}> updated \
+                            #           successfully **".format(args[2]))
 
     # ----- system overrides -----
     def emptyline(self):
