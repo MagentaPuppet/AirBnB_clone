@@ -35,10 +35,10 @@ class HBNBCommand(cmd.Cmd):
             my_model.save()
             key = "{}.{}".format(arg, my_model.id)
             print(my_model.id)
-            if key not in storage.all():
-                print("** an error occured **")
-            else:
-                print("** instance created successfully **")
+            # if key not in storage.all():
+            #     print("** an error occured **")
+            # else:
+            #     print("** instance created successfully **")
         else:
             if not arg:
                 print("** class name missing **")
