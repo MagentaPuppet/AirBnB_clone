@@ -125,23 +125,40 @@ class HBNBCommand(cmd.Cmd):
                     if length < 3:
                         print("** attribute name missing **")
                     else:
-                        dict = storage.all()[key].to_dict()
-                        if args[2] not in dict.keys():
-                            print("** attribute not found **")
-                        elif args[2] in ["id", "created_at", "updated_at"]:
+                        if args[2] in ["id", "created_at", "updated_at"]:
                             print("** access to attribute <{}> denied **"
                                   .format(args[2]))
                         elif length < 4:
                             print("** value missing **")
                         else:
+                            args[3] = self.thing(arg, 3)
                             setattr(storage.all()[key], args[2], args[3])
                             storage.save()
                             # storage.reload()
-                            # if getattr(storage.all()[key], args[2]) != args[3]:
+                            # if getattr(storage.all()[key],
+                            #            args[2]) != args[3]:
                             #     print("** an error occured **")
                             # else:
                             #     print("** attribute <{}> updated \
                             #           successfully **".format(args[2]))
+
+    @staticmethod
+    def thing(arg, index):
+        args = arg.split()
+        if args[index][0] == '"':
+            for i in range(len(arg)):
+                if arg[i] == '"':
+                    a = i
+                    break
+            b = None
+            for j in range(len(arg)):
+                if arg[j] == '"' and j != i:
+                    b = j + 1
+
+            args[index] = arg[a:b]
+            if b:
+                args[index] = args[index][1:-1]
+        return args[index]
 
     # ----- system overrides -----
     def emptyline(self):
