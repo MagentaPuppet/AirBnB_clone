@@ -18,7 +18,7 @@ class TestUser(unittest.TestCase):
         """Tests if User is a subclass of BaseModel"""
         self.assertTrue(issubclass(User, BaseModel))
 
-    def test_attr(self):
+    def test_first_name(self):
         """Tests if attributes exist in User"""
         my_user = User()
         my_user.first_name = "Betty"
