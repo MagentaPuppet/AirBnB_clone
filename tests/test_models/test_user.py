@@ -14,12 +14,24 @@ class TestUser(unittest.TestCase):
         """Tests if User is a subclass of BaseModel"""
         self.assertTrue(issubclass(User, BaseModel))
 
-    def test_attr(self):
+    def test_email(self):
         """Tests if attributes exist in User"""
         my_user = User()
         self.assertTrue(hasattr(my_user, "email"))
+
+    def test_password(self):
+        """Tests if attributes exist in User"""
+        my_user = User()
         self.assertTrue(hasattr(my_user, "password"))
+
+    def test_first_name(self):
+        """Tests if attributes exist in User"""
+        my_user = User()
         self.assertTrue(hasattr(my_user, "first_name"))
+
+    def test_last_name(self):
+        """Tests if attributes exist in User"""
+        my_user = User()
         self.assertTrue(hasattr(my_user, "last_name"))
 
 
