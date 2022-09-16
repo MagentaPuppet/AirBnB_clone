@@ -37,13 +37,6 @@ class FileStorage:
         with open(FileStorage.__file_path, 'w') as file:
             json.dump(file_data, file)
 
-    def classes(self):
-        """Helper method to import other classes from the package"""
-
-        from models.base_model import BaseModel
-        classes = {"BaseModel": BaseModel}
-        return classes
-
     def reload(self):
         """Deserializes the JSON file to the dictionary __objects
            (only if the JSON file (__file_path) exists); otherwise, do nothing.
@@ -55,4 +48,13 @@ class FileStorage:
                 file_data = json.load(file)
                 for key in file_data:
                     FileStorage.__objects[key] =\
-                        self.classes()['BaseModel'](**file_data[key])
+                        self.classes()[file_data[key]["__class__"]](**file_data[key])
+
+    def classes(self):
+        """Helper method to import other classes from the package"""
+
+        from models.base_model import BaseModel
+        from models.user import User
+        classes = {"BaseModel": BaseModel,
+                   "User": User}
+        return classes

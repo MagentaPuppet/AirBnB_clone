@@ -30,10 +30,9 @@ class HBNBCommand(cmd.Cmd):
            saves it (to the JSON file) and prints the id
         """
 
-        if arg == "BaseModel":
-            my_model = BaseModel()
+        if arg in storage.classes():
+            my_model = storage.classes()[arg]()
             my_model.save()
-            key = "{}.{}".format(arg, my_model.id)
             print(my_model.id)
             # if key not in storage.all():
             #     print("** an error occured **")
@@ -95,10 +94,15 @@ class HBNBCommand(cmd.Cmd):
            based or not on the class name
         """
 
-        if not arg or arg in storage.classes():
-            all = []
+        all = []
+        if not arg:
             for i in storage.all().values():
                 all += [i.__str__()]
+            print(all)
+        elif arg in storage.classes():
+            for i in storage.all().values():
+                if type(i).__name__ == arg:
+                    all += [i.__str__()]
             print(all)
         else:
             print("** class doesn't exist **")
