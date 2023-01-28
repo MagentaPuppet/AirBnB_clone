@@ -108,44 +108,44 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    def do_update(self, arg):
-        """Updates an instance based on the class name and id
-           by adding or updating the attribute
-        """
+    # def do_update(self, arg):
+    #     """Updates an instance based on the class name and id
+    #        by adding or updating the attribute
+    #     """
 
-        if not arg:
-            print("** class name missing **")
-        else:
-            args = arg.split()
-            length = len(args)
-            if args[0] not in storage.classes():
-                print("** class doesn't exist **")
-            elif length < 2:
-                print("** instance id missing **")
-            else:
-                key = "{}.{}".format(args[0], args[1])
-                if key not in storage.all():
-                    print("** no instance found **")
-                else:
-                    if length < 3:
-                        print("** attribute name missing **")
-                    else:
-                        if args[2] in ["id", "created_at", "updated_at"]:
-                            print("** access to attribute <{}> denied **"
-                                  .format(args[2]))
-                        elif length < 4:
-                            print("** value missing **")
-                        else:
-                            args[3] = self.formatString(arg, 3)
-                            setattr(storage.all()[key], args[2], args[3])
-                            storage.save()
-                            # storage.reload()
-                            # if getattr(storage.all()[key],
-                            #            args[2]) != args[3]:
-                            #     print("** an error occured **")
-                            # else:
-                            #     print("** attribute <{}> updated \
-                            #           successfully **".format(args[2]))
+    #     if not arg:
+    #         print("** class name missing **")
+    #     else:
+    #         args = arg.split()
+    #         length = len(args)
+    #         if args[0] not in storage.classes():
+    #             print("** class doesn't exist **")
+    #         elif length < 2:
+    #             print("** instance id missing **")
+    #         else:
+    #             key = "{}.{}".format(args[0], args[1])
+    #             if key not in storage.all():
+    #                 print("** no instance found **")
+    #             else:
+    #                 if length < 3:
+    #                     print("** attribute name missing **")
+    #                 else:
+    #                     if args[2] in ["id", "created_at", "updated_at"]:
+    #                         print("** access to attribute <{}> denied **"
+    #                               .format(args[2]))
+    #                     elif length < 4:
+    #                         print("** value missing **")
+    #                     else:
+    #                         args[3] = self.formatString(arg, 3)
+    #                         setattr(storage.all()[key], args[2], args[3])
+    #                         storage.save()
+    #                         # storage.reload()
+    #                         # if getattr(storage.all()[key],
+    #                         #            args[2]) != args[3]:
+    #                         #     print("** an error occured **")
+    #                         # else:
+    #                         #     print("** attribute <{}> updated \
+    #                         #           successfully **".format(args[2]))
 
     def do_count(self, arg):
         count = 0
