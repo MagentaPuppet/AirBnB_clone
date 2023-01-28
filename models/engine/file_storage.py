@@ -48,7 +48,8 @@ class FileStorage:
                 file_data = json.load(file)
                 for key in file_data:
                     FileStorage.__objects[key] =\
-                        self.classes()[file_data[key]["__class__"]](**file_data[key])
+                        self.classes()[file_data[key]["__class__"]](
+                            **file_data[key])
 
     def classes(self):
         """Helper method to import other classes from the package"""
