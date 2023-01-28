@@ -108,44 +108,44 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    # def do_update(self, arg):
-    #     """Updates an instance based on the class name and id
-    #        by adding or updating the attribute
-    #     """
+    def do_update(self, arg):
+        """Updates an instance based on the class name and id
+           by adding or updating the attribute
+        """
 
-    #     if not arg:
-    #         print("** class name missing **")
-    #     else:
-    #         args = arg.split()
-    #         length = len(args)
-    #         if args[0] not in storage.classes():
-    #             print("** class doesn't exist **")
-    #         elif length < 2:
-    #             print("** instance id missing **")
-    #         else:
-    #             key = "{}.{}".format(args[0], args[1])
-    #             if key not in storage.all():
-    #                 print("** no instance found **")
-    #             else:
-    #                 if length < 3:
-    #                     print("** attribute name missing **")
-    #                 else:
-    #                     if args[2] in ["id", "created_at", "updated_at"]:
-    #                         print("** access to attribute <{}> denied **"
-    #                               .format(args[2]))
-    #                     elif length < 4:
-    #                         print("** value missing **")
-    #                     else:
-    #                         args[3] = self.formatString(arg, 3)
-    #                         setattr(storage.all()[key], args[2], args[3])
-    #                         storage.save()
-    #                         # storage.reload()
-    #                         # if getattr(storage.all()[key],
-    #                         #            args[2]) != args[3]:
-    #                         #     print("** an error occured **")
-    #                         # else:
-    #                         #     print("** attribute <{}> updated \
-    #                         #           successfully **".format(args[2]))
+        if not arg:
+            print("** class name missing **")
+        else:
+            args = arg.split()
+            length = len(args)
+            if args[0] not in storage.classes():
+                print("** class doesn't exist **")
+            elif length < 2:
+                print("** instance id missing **")
+            else:
+                key = "{}.{}".format(args[0], args[1])
+                if key not in storage.all():
+                    print("** no instance found **")
+                else:
+                    if length < 3:
+                        print("** attribute name missing **")
+                    else:
+                        if args[2] in ["id", "created_at", "updated_at"]:
+                            print("** access to attribute <{}> denied **"
+                                  .format(args[2]))
+                        elif length < 4:
+                            print("** value missing **")
+                        else:
+                            args[3] = self.formatString(arg, 3)
+                            setattr(storage.all()[key], args[2], args[3])
+                            storage.save()
+                            # storage.reload()
+                            # if getattr(storage.all()[key],
+                            #            args[2]) != args[3]:
+                            #     print("** an error occured **")
+                            # else:
+                            #     print("** attribute <{}> updated \
+                            #           successfully **".format(args[2]))
 
     def do_count(self, arg):
         count = 0
@@ -160,54 +160,6 @@ class HBNBCommand(cmd.Cmd):
             print(count)
         else:
             print("** class doesn't exist **")
-
-    def do_update(self, arg):
-        """Updates an instance by adding or updating attribute.
-        """
-        if arg == "" or arg is None:
-            print("** class name missing **")
-            return
-
-        rex = r'^(\S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*")|(?:(\S)+)))?)?)?'
-        match = re.search(rex, arg)
-        classname = match.group(1)
-        uid = match.group(2)
-        attribute = match.group(3)
-        value = match.group(4)
-        if not match:
-            print("** class name missing **")
-        elif classname not in storage.classes():
-            print("** class doesn't exist **")
-        elif uid is None:
-            print("** instance id missing **")
-        else:
-            key = "{}.{}".format(classname, uid)
-            if key not in storage.all():
-                print("** no instance found **")
-            elif not attribute:
-                print("** attribute name missing **")
-            elif not value:
-                print("** value missing **")
-            else:
-                cast = None
-                if not re.search('^".*"$', value):
-                    if '.' in value:
-                        cast = float
-                    else:
-                        cast = int
-                else:
-                    value = value.replace('"', '')
-                attributes = storage.attributes()[classname]
-                if attribute in attributes:
-                    value = attributes[attribute](value)
-                elif cast:
-                    try:
-                        value = cast(value)
-                    except ValueError:
-                        pass  # fine, stay a string then
-                setattr(storage.all()[key], attribute, value)
-                storage.all()[key].save()
-
 
     def default(self, arg):
         """Catch commands if nothing else matches then."""
