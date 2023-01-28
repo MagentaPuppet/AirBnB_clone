@@ -148,7 +148,18 @@ class HBNBCommand(cmd.Cmd):
                             #           successfully **".format(args[2]))
 
     def do_count(self, arg):
-        pass
+        count = 0
+        if not arg:
+            for i in storage.all().values():
+                count += 1
+            print(count)
+        elif arg in storage.classes():
+            for i in storage.all().values():
+                if type(i).__name__ == arg:
+                    count += 1
+            print(count)
+        else:
+            print("** class doesn't exist **")
 
     def default(self, arg):
         """Catch commands if nothing else matches then."""
@@ -160,14 +171,18 @@ class HBNBCommand(cmd.Cmd):
         """Intercepts commands to test for class.syntax()"""
 
         args = re.split(r"\.|\(|\)", arg)
-        print(args)
-        # for i in args:
-        #     if i in storage.classes().keys():
-        #         print(i)
-        result = getattr(self, "do_" + args[1])
-        # str = f'{args[1]} {args[0]}'
-        # print(str)
-        return result(args[0])
+        if len(args) > 1:
+            if hasattr(self, "do_" + args[1]):
+                result = getattr(self, "do_" + args[1])
+                return result(args[0])
+            elif args[0] in storage.classes():
+                print("** class exists but an invalid command was passed **")
+            else:
+                print("** invalid syntax on method for specified class! **")
+        elif arg in storage.classes():
+            print("** class exists but no command was passed **")
+        else:
+            print("** command not found! Type help or ? to list commands **")
 
     @staticmethod
     def formatString(arg, index):
