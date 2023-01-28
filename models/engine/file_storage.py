@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module that contains the class FileStorage"""
 
+import datetime
 import json
 from os.path import exists
 
