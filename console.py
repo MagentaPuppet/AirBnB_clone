@@ -174,7 +174,7 @@ class HBNBCommand(cmd.Cmd):
                  "Place", "Review"]
 
         commands = {"all": self.do_all,
-                    "count": self.my_count,
+                    "count": self.do_count,
                     "show": self.do_show,
                     "destroy": self.do_destroy,
                     "update": self.do_update}
