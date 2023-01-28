@@ -91,7 +91,7 @@ class FileStorage:
                 "last_name": str
                 },
             "State": {"name": str},
-            "City":{"state_id": str, "name": str},
+            "City": {"state_id": str, "name": str},
             "Amenity": {"name": str},
             "Place": {
                 "city_id": str,
