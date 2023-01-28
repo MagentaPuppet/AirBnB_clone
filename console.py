@@ -4,6 +4,8 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
+import re
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -144,6 +146,28 @@ class HBNBCommand(cmd.Cmd):
                             # else:
                             #     print("** attribute <{}> updated \
                             #           successfully **".format(args[2]))
+
+    def do_count(self, arg):
+        pass
+
+    def default(self, arg):
+        """Catch commands if nothing else matches then."""
+
+        # print("DEF:::", arg)
+        self._precmd(arg)
+
+    def _precmd(self, arg):
+        """Intercepts commands to test for class.syntax()"""
+
+        args = re.split(r"\.|\(|\)", arg)
+        print(args)
+        # for i in args:
+        #     if i in storage.classes().keys():
+        #         print(i)
+        result = getattr(self, "do_" + args[1])
+        # str = f'{args[1]} {args[0]}'
+        # print(str)
+        return result(args[0])
 
     @staticmethod
     def formatString(arg, index):
