@@ -10,14 +10,13 @@ class HBNBCommand(cmd.Cmd):
     """Class that defines the console commands for the hbnb console"""
 
     # intro = 'Welcome to the HBNB console. Type help or ? to list commands.\n'
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
 
     # ----- basic console commands -----
     def do_quit(self, arg):
         """Quit command to exit the console\n"""
 
-        print('Quitting the console')
-        return True
+        return self.do_EOF(arg)
 
     def do_EOF(self, arg):
         """Quit command to exit the console\n"""
@@ -135,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
                         elif length < 4:
                             print("** value missing **")
                         else:
-                            args[3] = self.thing(arg, 3)
+                            args[3] = self.formatString(arg, 3)
                             setattr(storage.all()[key], args[2], args[3])
                             storage.save()
                             # storage.reload()
@@ -147,7 +146,11 @@ class HBNBCommand(cmd.Cmd):
                             #           successfully **".format(args[2]))
 
     @staticmethod
-    def thing(arg, index):
+    def formatString(arg, index):
+        """Helper method for FileStorage.do_update().
+        Formats a string passed in as an argument
+        """
+
         args = arg.split()
         if args[index][0] == '"':
             for i in range(len(arg)):
